@@ -56,6 +56,11 @@
                 linear-gradient(135deg, var(--bg-0), var(--bg-1));
         }
 
+        body.menu-open {
+            overflow: hidden;
+            touch-action: none;
+        }
+
         .preloader {
             position: fixed;
             inset: 0;
@@ -358,6 +363,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .nav-tab:hover {
@@ -729,9 +736,22 @@
                 transition: transform 0.28s ease;
                 box-shadow: 0 22px 80px rgba(0, 0, 0, 0.75);
                 z-index: 6;
+                will-change: transform;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
             }
             .nav-tabs.open { transform: translateX(0); }
-            .nav-tab { text-align: center; width: 100%; }
+            .nav-tab {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                text-align: center;
+                padding: 16px 16px;
+                font-size: 1.05em;
+                border-radius: 16px;
+            }
             .content-card { padding: 25px 20px; }
             .amount-display { font-size: 2.5em; }
             .contact-phone { font-size: 1.35em; padding: 18px 18px; width: 100%; text-align: center; }
@@ -1142,6 +1162,7 @@
             nav?.classList.remove('open');
             burger?.classList.remove('open');
             overlay?.classList.remove('open');
+            document.body.classList.remove('menu-open');
         }
 
         function copyContactPhone(e) {
@@ -1168,6 +1189,7 @@
             nav.classList.toggle('open');
             burger.classList.toggle('open');
             overlay.classList.toggle('open');
+            document.body.classList.toggle('menu-open');
         }
 
         // Стартовый вид: вкладка "Цель"
