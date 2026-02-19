@@ -296,7 +296,7 @@
         }
 
         .mobile-safe {
-            padding-bottom: 84px;
+            padding-bottom: 18px;
         }
 
         .cta-row {
@@ -712,31 +712,26 @@
             }
             .header h1 { font-size: 2.1em; }
             .subtitle { font-size: 1.05em; }
-            /* На телефоне — удобная нижняя панель вместо бургера */
-            .burger { display: none; }
-            .drawer-overlay { display: none; }
+            /* На телефоне — бургер + боковая панель (drawer) */
+            .burger { display: flex; }
+            .drawer-overlay { display: block; }
             .nav-tabs {
                 position: fixed;
-                left: 10px;
-                right: 10px;
-                bottom: 10px;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: min(86vw, 360px);
+                padding: 78px 14px 14px;
                 margin: 0;
-                z-index: 10;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                gap: 8px;
-                padding: 10px;
-                border-radius: 18px;
+                justify-content: flex-start;
+                border-radius: 0;
+                transform: translateX(110%);
+                transition: transform 0.28s ease;
+                box-shadow: 0 22px 80px rgba(0, 0, 0, 0.75);
+                z-index: 6;
             }
-            .nav-tabs.open { transform: none; }
-            .nav-tab {
-                flex: 1;
-                padding: 10px 10px;
-                font-size: 0.95em;
-                border-radius: 14px;
-                white-space: nowrap;
-            }
+            .nav-tabs.open { transform: translateX(0); }
+            .nav-tab { text-align: center; width: 100%; }
             .content-card { padding: 25px 20px; }
             .amount-display { font-size: 2.5em; }
             .contact-phone { font-size: 1.35em; padding: 18px 18px; width: 100%; text-align: center; }
@@ -781,7 +776,7 @@
             <span></span>
             <span></span>
         </button>
-        <div class="header">
+        <div class="header" id="hero-block">
             <div class="header-main">
                 <img src="free-icon-crescent-10088871.png" alt="Полумесяц" class="header-icon">
                 <div class="header-title-block">
@@ -813,7 +808,7 @@
             <a href="ayaty.html" class="nav-tab ayahs-link">📖 Аяты</a>
         </nav>
 
-        <div class="feature-grid">
+        <div class="feature-grid" id="features-block">
             <div class="feature">
                 <div class="feature-head">
                     <img class="feature-icon" src="icons8-бутылка-48.png" alt="Вода">
@@ -1128,6 +1123,15 @@
             document.querySelectorAll('.nav-tab[data-tab]').forEach(t => t.classList.remove('active'));
             document.getElementById('tab-' + tabId)?.classList.add('active');
             document.querySelector('.nav-tab[data-tab="' + tabId + '"]')?.classList.add('active');
+
+            // На вкладках "Собрано/Реквизиты/Контакты" скрываем верхний hero и карточки,
+            // чтобы экран был максимально чистый и удобный.
+            const hero = document.getElementById('hero-block');
+            const features = document.getElementById('features-block');
+            const showTop = tabId === 'goal';
+            if (hero) hero.style.display = showTop ? '' : 'none';
+            if (features) features.style.display = showTop ? '' : 'none';
+
             closeMobileMenu();
         }
 
@@ -1165,6 +1169,11 @@
             burger.classList.toggle('open');
             overlay.classList.toggle('open');
         }
+
+        // Стартовый вид: вкладка "Цель"
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab('goal');
+        }, { once: true });
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeMobileMenu();
