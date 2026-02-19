@@ -145,9 +145,9 @@
         }
 
         .burger {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: fixed;
+            top: 16px;
+            right: 16px;
             width: 44px;
             height: 44px;
             border-radius: 14px;
@@ -161,6 +161,22 @@
             backdrop-filter: blur(12px);
             transition: all 0.3s ease;
             z-index: 5;
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(2px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 4;
+        }
+
+        .drawer-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .burger span {
@@ -277,6 +293,10 @@
             font-size: 0.98em;
             line-height: 1.7;
             color: rgba(255, 255, 255, 0.9);
+        }
+
+        .mobile-safe {
+            padding-bottom: 84px;
         }
 
         .cta-row {
@@ -604,6 +624,7 @@
             transition: all 0.3s ease;
             text-decoration: none;
             color: #FFD700;
+            white-space: nowrap;
         }
 
         .contact-phone:hover {
@@ -691,22 +712,48 @@
             }
             .header h1 { font-size: 2.1em; }
             .subtitle { font-size: 1.05em; }
-            .burger { display: flex; }
+            /* На телефоне — удобная нижняя панель вместо бургера */
+            .burger { display: none; }
+            .drawer-overlay { display: none; }
             .nav-tabs {
-                display: none;
-                flex-direction: column;
-                position: relative;
-                margin-top: 10px;
-                box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
-            }
-            .nav-tabs.open {
+                position: fixed;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                margin: 0;
+                z-index: 10;
                 display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 8px;
+                padding: 10px;
+                border-radius: 18px;
             }
-            .nav-tab { text-align: center; width: 100%; }
+            .nav-tabs.open { transform: none; }
+            .nav-tab {
+                flex: 1;
+                padding: 10px 10px;
+                font-size: 0.95em;
+                border-radius: 14px;
+                white-space: nowrap;
+            }
             .content-card { padding: 25px 20px; }
             .amount-display { font-size: 2.5em; }
-            .contact-phone { font-size: 1.5em; padding: 20px 30px; }
+            .contact-phone { font-size: 1.35em; padding: 18px 18px; width: 100%; text-align: center; }
             .feature-grid { grid-template-columns: 1fr; }
+
+            .header {
+                padding: 22px 6px 10px;
+                gap: 12px;
+            }
+            .header-icon { width: 56px; height: 56px; }
+            .header-greeting { padding: 16px 14px; }
+            .header-greeting small { font-size: 1em; }
+            .header-greeting strong { font-size: 1.05em; }
+            .header-greeting p {
+                font-size: 0.98em;
+                line-height: 1.65;
+            }
         }
 
         @media (max-width: 480px) {
@@ -726,7 +773,9 @@
         <div class="preloader-spinner"></div>
     </div>
 
-    <div class="container">
+    <div class="drawer-overlay" onclick="closeMobileMenu()"></div>
+
+    <div class="container mobile-safe">
         <button class="burger" type="button" onclick="toggleMenu()">
             <span></span>
             <span></span>
@@ -1085,8 +1134,10 @@
         function closeMobileMenu() {
             const nav = document.querySelector('.nav-tabs');
             const burger = document.querySelector('.burger');
+            const overlay = document.querySelector('.drawer-overlay');
             nav?.classList.remove('open');
             burger?.classList.remove('open');
+            overlay?.classList.remove('open');
         }
 
         function copyContactPhone(e) {
@@ -1109,9 +1160,15 @@
         function toggleMenu() {
             const nav = document.querySelector('.nav-tabs');
             const burger = document.querySelector('.burger');
+            const overlay = document.querySelector('.drawer-overlay');
             nav.classList.toggle('open');
             burger.classList.toggle('open');
+            overlay.classList.toggle('open');
         }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMobileMenu();
+        });
 
         function copyToClipboard(text, element) {
             const textToCopy = text.replace(/\s/g, '');
