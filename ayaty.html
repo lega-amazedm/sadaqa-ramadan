@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#0a3d2e">
+    <title>Аяты о Рамадане — Рамадан Мубарак</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a3d2e 0%, #1a5f3f 25%, #0d4a35 50%, #1a5f3f 75%, #0a3d2e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 215, 0, 0.03) 2px, rgba(255, 215, 0, 0.03) 4px);
+            opacity: 0.6;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 15px;
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .header-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: block;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #FFD700;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .intro {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            text-align: center;
+        }
+
+        .intro p {
+            font-size: 1.3em;
+            line-height: 1.9;
+            color: #fff;
+        }
+
+        .ayah-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 215, 0, 0.2);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-right: 6px solid #FFD700;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ayah-card:hover {
+            transform: translateX(-8px);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .ayah-card::before {
+            content: '❋';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.8em;
+            color: rgba(255, 215, 0, 0.3);
+        }
+
+        .ayah-card::after {
+            content: '❋';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.8em;
+            color: rgba(255, 215, 0, 0.3);
+        }
+
+        .ayah-text {
+            font-size: 1.8em;
+            line-height: 2.3;
+            text-align: right;
+            direction: rtl;
+            font-family: 'Amiri', serif;
+            color: #fff;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .ayah-translation {
+            text-align: left;
+            direction: ltr;
+            font-style: italic;
+            color: #e8e8e8;
+            font-size: 1.2em;
+            line-height: 1.8;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            padding-top: 20px;
+        }
+
+        .ayah-reference {
+            text-align: left;
+            margin-top: 15px;
+            font-size: 1em;
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+            margin-bottom: 12px;
+        }
+
+        .footer .ramadan-greeting {
+            font-size: 1.4em;
+            color: #FFD700;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .header h1 { font-size: 2.2em; }
+            .subtitle { font-size: 1.2em; }
+            .ayah-card { padding: 30px 25px; }
+            .ayah-text { font-size: 1.5em; }
+            .ayah-translation { font-size: 1.1em; }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.8em; }
+            .ayah-text { font-size: 1.3em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Вернуться на главную</a>
+
+        <div class="header">
+            <img src="free-icon-crescent-10088871.png" alt="Полумесяц" class="header-icon">
+            <h1>Аяты о Рамадане</h1>
+            <p class="subtitle">Священные аяты Корана о благословенном месяце 🌙</p>
+        </div>
+
+        <div class="intro">
+            <p>
+                Рамадан — особый месяц для всех мусульман. В нём был ниспослан Коран как руководство для людей. 
+                Предлагаем вашему вниманию аяты Священного Корана, связанные с постом и месяцем Рамадан.
+            </p>
+        </div>
+
+        <div class="ayah-card">
+            <div class="ayah-text">
+                يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ
+            </div>
+            <div class="ayah-translation">
+                "О те, которые уверовали! Предписан вам пост, подобно тому, как он был предписан тем, кто был до вас, 
+                чтобы вы были богобоязненными"
+            </div>
+            <div class="ayah-reference">Сура Аль-Бакара, аят 183</div>
+        </div>
+
+        <div class="ayah-card">
+            <div class="ayah-text">
+                شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ هُدًى لِّلنَّاسِ وَبَيِّنَاتٍ مِّنَ الْهُدَىٰ وَالْفُرْقَانِ فَمَن شَهِدَ مِنكُمُ الشَّهْرَ فَلْيَصُمْهُ
+            </div>
+            <div class="ayah-translation">
+                "Месяц Рамадан, в который был ниспослан Коран как руководство для людей и разъяснение прямого пути и различения. 
+                Тот из вас, кого застанет этот месяц, пусть постится в нём"
+            </div>
+            <div class="ayah-reference">Сура Аль-Бакара, аят 185</div>
+        </div>
+
+        <div class="ayah-card">
+            <div class="ayah-text">
+                وَمَا تُقَدِّمُوا لِأَنفُسِكُم مِّنْ خَيْرٍ تَجِدُوهُ عِندَ اللَّهِ هُوَ خَيْرًا وَأَعْظَمَ أَجْرًا
+            </div>
+            <div class="ayah-translation">
+                "И что бы вы ни потратили из добра, оно для вас самих, и вы расходуете только из стремления к Лику Аллаха. 
+                И что бы вы ни потратили из добра, вам будет воздано сполна, и с вами не поступят несправедливо"
+            </div>
+            <div class="ayah-reference">Сура Аль-Бакара, аят 272</div>
+        </div>
+
+        <div class="ayah-card">
+            <div class="ayah-text">
+                إِنَّ الْمُصَّدِّقِينَ وَالْمُصَّدِّقَاتِ وَأَقْرَضُوا اللَّهَ قَرْضًا حَسَنًا يُضَاعَفُ لَهُمْ وَلَهُمْ أَجْرٌ كَرِيمٌ
+            </div>
+            <div class="ayah-translation">
+                "Воистину, мужчины и женщины, подающие милостыню и одолжившие Аллаху прекрасный заём, получат его вдвойне, 
+                и им уготована щедрая награда"
+            </div>
+            <div class="ayah-reference">Сура Аль-Хадид, аят 18</div>
+        </div>
+
+        <div class="ayah-card">
+            <div class="ayah-text">
+                مَّثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنبَتَتْ سَبْعَ سَنَابِلَ فِي كُلِّ سُنبُلَةٍ مِّائَةُ حَبَّةٍ
+            </div>
+            <div class="ayah-translation">
+                "Притча о тех, кто расходует своё имущество на пути Аллаха, подобна притче о зерне, из которого выросло семь колосьев, 
+                а в каждом колосе — сто зёрен"
+            </div>
+            <div class="ayah-reference">Сура Аль-Бакара, аят 261</div>
+        </div>
+
+        <div class="footer">
+            <p>Да примет Аллах ваши благие дела в этот благословенный месяц!</p>
+            <p class="ramadan-greeting">Рамадан Карим! 🌙</p>
+        </div>
+    </div>
+</body>
+</html>
